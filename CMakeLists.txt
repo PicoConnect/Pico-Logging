@@ -56,19 +56,6 @@ pico_set_program_version(PicoLogging "0.1")
 # Set language to C++
 set_target_properties(PicoLogging PROPERTIES LINKER_LANGUAGE CXX)
 
-# Conditionally place library in a PicoConnect directory if it exists.
-if(DEFINED ENV{PICO_CONNECT} AND NOT "$ENV{PICO_CONNECT}" STREQUAL "")
-    # Construct full install prefix by appending "PicoLibraries"
-    set(_PICO_CONNECT_PATH "$ENV{PICO_CONNECT}/PicoLibraries")
-
-    # Cache it so CMake remembers; FORCE so env wins over previous settings
-    set(CMAKE_INSTALL_PREFIX "${_PICO_CONNECT_PATH}" CACHE PATH "Install prefix" FORCE)
-
-    message(STATUS "Installing to PicoConnect path: ${CMAKE_INSTALL_PREFIX}")
-else()
-    message(STATUS "Environment variable PICO_CONNECT not set — using default CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
-endif()
-
 # make cache variables for install destinations
 include(GNUInstallDirs)
 
