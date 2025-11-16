@@ -1,11 +1,6 @@
 @echo off
 setlocal
 
-
-rem 1. Go to root directory (one level above where this bat file is kept)
-pushd "%~dp0\.."
-set "ROOT=%CD%"
-
 :: ===========================================================================
 :: SCRIPT CONFIG
 if not defined BUILD_DIR (
@@ -28,6 +23,11 @@ if not defined PICO_BOARD (
 )
 :: ===========================================================================
 
+rem 1. Go to root directory (one level above where this bat file is kept)
+pushd "%~dp0\.."
+set "ROOT=%CD%"
+
+
 echo ==== Begin Building in %CONFIG% ====
 echo Root: %ROOT%
 echo Build dir: %BUILD_DIR%
@@ -40,6 +40,7 @@ if exist "%BUILD_DIR%" (
 )
 mkdir "%BUILD_DIR%"
 
+rem === 3. Build the binaries
 echo.
 echo == Configuring Cmake in %CONFIG% ==
 echo cmake -S "%ROOT%" -B "%BUILD_DIR%" -G "Ninja Multi-Config"
